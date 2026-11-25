@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.fism_admin_auth.json
+.fism_adsterra_config.json
+.fism_legal_docs.json
+.fism_connected_apps.json
+.fism_apk_release/
+*.log
+.DS_Store
