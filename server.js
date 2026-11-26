@@ -16,6 +16,17 @@ async function startStandaloneBackend() {
     projectRootDir,
   });
 
+  // Render Health Check Path (/health)
+  app.get('/health', (_req, res) => {
+    res.status(200).json({ status: 'ok', uptime: process.uptime() });
+  });
+
+  // Optional root route in case Health Check Path is set to '/'
+  app.get('/', (_req, res, next) => {
+    if (res.headersSent) return next();
+    res.status(200).send('FISM Backend Running');
+  });
+
   attachUpgradeHandler(server);
 
   if (process.env.SERVE_ADMIN === 'true') {
@@ -46,3 +57,4 @@ startStandaloneBackend().catch((err) => {
   console.error('Failed to start FISM Standalone Backend:', err);
   process.exit(1);
 });
+
